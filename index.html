@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>walidacja</title>
+</head>
+<body>
+
+
+<style>
+	.err{
+		border: 2px solid red;
+	}
+	.ok{
+		border: 2px solid green;
+	}
+</style>
+
+
+
+
+<form id="Formularz" name="Formularz" method="POST" action="skrypt_przetwarzajacy.php">
+
+
+	<div class="input-group">
+    	<label for="Mail">Cokolwiek</label><br>
+    	<input type="text" required name="Cokolwiek"><br><br>
+    </div>
+    
+    <div class="input-group">
+    	<label for="Imie">Liczby</label><br>
+    	<input type="text" required name="Liczby" data-pattern="^[0-9]+$"><br><br>
+    </div>
+    
+    <div class="input-group">
+    	<label for="Mail">E-mail</label><br>
+    	<input type="text" required name="E-mail" data-pattern="^[0-9a-zA-Z_.-]+@[0-9a-zA-Z.-]+\.[a-zA-Z]{2,3}$"><br><br>
+    </div>
+    
+    <div class="input-group">
+    	<label for="Mail">Telefon</label><br>
+    	<input type="text" required name="Telefon" data-pattern="^[0-9]{9,13}$"><br><br>
+    </div>
+
+    <div class="input-group">
+    	<label for="Mail">Textarea</label><br>
+    	<textarea name="textarea" required id="" cols="30" rows="10"></textarea>
+    	<br><br>
+    </div>
+
+	<div class="input-group">
+    	<input type="checkbox" required name="checkbox">
+    </div>
+
+	<br><br>
+
+    <input type="submit" value="Send" />
+    
+</form>
+
+<div id="ajax"></div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/walidacja.js"></script>
+	
+</body>
+</html>
