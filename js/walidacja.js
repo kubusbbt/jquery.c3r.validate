@@ -1,5 +1,22 @@
-$(document).ready(function(){
 
+/***************************************************
+
+telefon
+data-pattern="^[0-9+ ]{9,13}$"
+
+data urodzenia
+data-pattern="^[0-9]{1,2}[-/.][0-9]{1,2}[-/.][0-9]{4}$"
+
+pesel
+data-pattern="^[0-9]{11}$" maxlength="11"
+
+kod pocztowy
+data-pattern="^[0-9]{2}-[0-9]{3}$"
+
+****************************************************/
+
+
+$(document).ready(function(){
 
 
 function testInputText(element) {
@@ -8,39 +25,53 @@ function testInputText(element) {
 		var reg = new RegExp( $(element).attr('data-pattern'), 'gi' );
 
 	    if ( !reg.test(str) ) {
-	        $(element).removeClass('ok').addClass('err');
+	        $(element).parent().removeClass('valid').addClass('invalid');
 	        return false;
 	    } else {
-	        $(element).addClass('ok').removeClass('err');
+	        $(element).parent().addClass('valid').removeClass('invalid');
 	        return true;
 	    }	
 	}else{
 		if ( $(element).val() != '' ) {
-	        $(element).addClass('ok').removeClass('err');
+	        $(element).parent().addClass('valid').removeClass('invalid');
 	        return true;
 	    } else {
-	        $(element).removeClass('ok').addClass('err');
+	        $(element).parent().removeClass('valid').addClass('invalid');
 	        return false;
 	    }	
 	}
 }
 
+function testInputEmail(element) {
+	var pattern = /^[0-9a-zA-Z_.-]+@[0-9a-zA-Z.-]+\.[a-zA-Z]{2,3}$/;
+	var str = $(element).val();
+	var reg = pattern;
+
+    if ( !reg.test(str) ) {
+        $(element).parent().removeClass('valid').addClass('invalid');
+        return false;
+    } else {
+        $(element).parent().addClass('valid').removeClass('invalid');
+        return true;
+    }	
+}
+
 function testInputCheckbox(element){
 	if( element.checked == true ){
-	    $(element).parent().addClass('ok').removeClass('err');
+	    $(element).parent().addClass('valid').removeClass('invalid');
 	    return true;
 	}else{
-	    $(element).parent().removeClass('ok').addClass('err');
+	    $(element).parent().removeClass('valid').addClass('invalid');
 	    return false;		
 	}
 }
 
 function testTextarea(element){
 	if ( $(element).val() != '' ) {
-        $(element).addClass('ok').removeClass('err');
+        $(element).parent().addClass('valid').removeClass('invalid');
         return true;
     } else {
-        $(element).removeClass('ok').addClass('err');
+        $(element).parent().removeClass('valid').addClass('invalid');
         return false;
     }
 }
@@ -48,7 +79,7 @@ function testTextarea(element){
 
 
 //remove attr required
-$('input, textarea').each(function(){
+$('input, textarea, select').each(function(){
 	if( $(this).attr('required') ){
 		$(this).removeAttr('required');
 		$(this).addClass('required');
@@ -60,6 +91,10 @@ $('input, textarea').each(function(){
 $(document).on('keyup blur change', 'input, textarea', function(event){
 	if( $(this).attr('type') == 'text' ){
 		testInputText(this);
+	}
+
+	if( $(this).attr('type') == 'email' ){
+		testInputEmail(this);
 	}
 
 	if( $(this).attr('type') == 'checkbox' ){
@@ -78,6 +113,12 @@ $('form').submit(function(){
 
 	$('input[type=text].required').each(function(){
 		if( testInputText(this) == false ){
+			output = false;
+		}
+	});
+
+	$('input[type=email].required').each(function(){
+		if( testInputEmail(this) == false ){
 			output = false;
 		}
 	});
@@ -106,13 +147,9 @@ $('form').submit(function(){
 		});
 	}
 
-
 	return false;
 	// return output;
 });
-
-
-
 
 
 }); //end document ready
