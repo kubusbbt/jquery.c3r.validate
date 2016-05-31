@@ -1,18 +1,18 @@
-
 /***************************************************
+	walidacja.js,
+	Copyright 2015-2016, JAdesign.pl
 
-telefon
-data-pattern="^[0-9+ ]{9,13}$" maxlength="13"
+	telefon
+	data-pattern="^[0-9+ ]{9,13}$" maxlength="13"
 
-data urodzenia
-data-pattern="^[0-9]{1,2}[-/.][0-9]{1,2}[-/.][0-9]{4}$"
+	data urodzenia
+	data-pattern="^[0-9]{1,2}[-/.][0-9]{1,2}[-/.][0-9]{4}$"
 
-pesel
-data-pattern="^[0-9]{11}$" maxlength="11"
+	pesel
+	data-pattern="^[0-9]{11}$" maxlength="11"
 
-kod pocztowy
-data-pattern="^[0-9]{2}-[0-9]{3}$"
-
+	kod pocztowy
+	data-pattern="^[0-9]{2}-[0-9]{3}$"
 ****************************************************/
 
 
