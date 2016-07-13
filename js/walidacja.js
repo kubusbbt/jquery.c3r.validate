@@ -128,36 +128,44 @@ $(document).ready(function(){
 	//walidation on form send
 	$('form').submit(function(){
 		output = true;
+		test = false;
 
 		$('input[type=text].required').each(function(){
 			if( testInputText(this) == false ){
 				output = false;
+				if(test==true){console.log(this);}
 			}
 		});
 
 		$('input[type=email].required').each(function(){
 			if( testInputEmail(this) == false ){
 				output = false;
+				if(test==true){console.log(this);}
 			}
 		});
 
 		$('input[type=checkbox].required').each(function(){
 			if( testInputCheckbox(this) == false ){
 				output = false;
+				if(test==true){console.log(this);}
 			}
 		});
 
 		$('select.required').each(function(){
 			if( testInputSelect(this) == false ){
 				output = false;
+				if(test==true){console.log(this);}
 			}
 		});
 
 		$('textarea.required').each(function(){
 			if( testTextarea(this) == false ){
 				output = false;
+				if(test==true){console.log(this);}
 			}
 		});
+
+		if(test==true){console.log('output = '+output);}
 		
 		if( output == true ){		
 			$.ajax({
