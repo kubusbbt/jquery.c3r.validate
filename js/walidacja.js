@@ -103,7 +103,7 @@ $(document).ready(function(){
 	});
 
 	//live walidation
-	$(document).on('keyup blur change', 'input, textarea, select', function(event){
+	$(document).on('keyup blur change', 'input.required, textarea.required, select.required', function(event){
 		if( $(this).attr('type') == 'text' ){
 			testInputText(this);
 		}
