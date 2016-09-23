@@ -128,7 +128,9 @@ $(document).ready(function(){
 	//walidation on form send
 	$('form').submit(function(){
 		output = true;
-		test = false;
+		
+		test = true;
+		sendMode = 'normal'; // ajax | post | normal
 
 		$('input[type=text].required').each(function(){
 			if( testInputText(this) == false ){
@@ -166,21 +168,35 @@ $(document).ready(function(){
 		});
 
 		if(test==true){console.log('output = '+output);}
-		
-		if( output == true ){		
-			$.ajax({
-				url: 'ajax.php',
-				type: 'POST',
-				data: $(this).serialize(),
 
-				success: function(data){
-				  $('#ajax').html(data);
-				}
-			});
+		if( output == true ){
+			if( sendMode == 'ajax' ){
+				$.ajax({
+					url: 'ajax.php',
+					type: 'POST',
+					data: $(this).serialize(),
+
+					success: function(data){
+					  $('#ajax').html(data);
+					}
+				});
+
+				return false;
+			}
+			if( sendMode == 'post' ){
+				$.post("ajax.php", myVars, function(data) {                   
+					console.log(data);
+				}, 'json');
+
+				return false;
+			}
+			if( sendMode == 'normal' ){
+				return output;
+			}
+		}else{
+			return false;
 		}
 
-		return false;
-		// return output;
-	});
+	}); // end $('form').submit(function(){
 
 }); //end document ready
