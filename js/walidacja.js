@@ -28,25 +28,38 @@ $(document).ready(function(){
 	}
 
 	function testInputText(element) {
-		if( $(element).attr('data-pattern') != null ){
-			var str = $(element).val();
-			var reg = new RegExp( $(element).attr('data-pattern'), 'gi' );
+		if( $(element).data('type') != null ){
+			
+			if ( testPesel(element) == true ){
+				parentElement(element).addClass('valid').removeClass('invalid');
+				return true;
+			}
+			else{
+				parentElement(element).removeClass('valid').addClass('invalid');
+				return false;
+			}
 
-		    if ( !reg.test(str) ) {
-		        parentElement(element).removeClass('valid').addClass('invalid');	        
-		        return false;
-		    } else {
-		        parentElement(element).addClass('valid').removeClass('invalid');
-		        return true;
-		    }	
 		}else{
-			if ( $(element).val() != '' ) {
-		        parentElement(element).addClass('valid').removeClass('invalid');
-		        return true;
-		    } else {
-		        parentElement(element).removeClass('valid').addClass('invalid');
-		        return false;
-		    }	
+			if( $(element).attr('data-pattern') != null ){
+				var str = $(element).val();
+				var reg = new RegExp( $(element).attr('data-pattern'), 'gi' );
+
+			    if ( !reg.test(str) ) {
+			        parentElement(element).removeClass('valid').addClass('invalid');	        
+			        return false;
+			    } else {
+			        parentElement(element).addClass('valid').removeClass('invalid');
+			        return true;
+			    }	
+			}else{
+				if ( $(element).val() != '' ) {
+			        parentElement(element).addClass('valid').removeClass('invalid');
+			        return true;
+			    } else {
+			        parentElement(element).removeClass('valid').addClass('invalid');
+			        return false;
+			    }	
+			}
 		}
 	}
 
@@ -92,6 +105,31 @@ $(document).ready(function(){
 	        parentElement(element).removeClass('valid').addClass('invalid');
 	        return false;
 	    }
+	}
+
+	function testPesel(element) {
+		var pesel = $(element).val();
+		var output = false;
+		
+		var reg = /^[0-9]{11}$/;
+		if(reg.test(pesel) == false) {
+			output = false;
+		}
+		else
+		{
+			var dig = (""+pesel).split("");
+			var kontrola = (1*parseInt(dig[0]) + 3*parseInt(dig[1]) + 7*parseInt(dig[2]) + 9*parseInt(dig[3]) + 1*parseInt(dig[4]) + 3*parseInt(dig[5]) + 7*parseInt(dig[6]) + 9*parseInt(dig[7]) + 1*parseInt(dig[8]) + 3*parseInt(dig[9]))%10;
+			if(kontrola==0) kontrola = 10;
+			kontrola = 10 - kontrola;
+			if(parseInt(dig[10])==kontrola){
+				output = true;
+			}
+			else{
+				output = false;
+			}
+		}
+
+		return output;
 	}
 
 	//remove attr required
