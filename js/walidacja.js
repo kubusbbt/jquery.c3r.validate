@@ -28,7 +28,7 @@ $(document).ready(function(){
 	}
 
 	function testInputText(element) {
-		if( $(element).data('type') != null ){
+		if( $(element).data('type') == 'pesel' ){
 			
 			if ( testPesel(element) == true ){
 				parentElement(element).addClass('valid').removeClass('invalid');
