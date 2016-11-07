@@ -1,7 +1,13 @@
 /***************************************************
 	walidacja.js,
 	Copyright 2015-2016, JAdesign.pl
-
+	
+	znaki PL
+	ęóąśłżźćńĘÓĄŚŁŻŹĆŃ
+	
+	imie
+	data-pattern="^[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ -]{3,}$"
+	
 	telefon
 	data-pattern="^[0-9+ ]{9,13}$" maxlength="13"
 
