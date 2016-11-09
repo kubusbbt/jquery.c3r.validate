@@ -244,3 +244,15 @@ $(document).ready(function(){
 	}); // end $('form').submit(function(){
 
 }); //end document ready
+
+function preloader(){
+	$('.preloader').removeClass('hidden');
+	$('form').css('opacity', '0.1');
+	$('form').css('pointer-events', 'none');
+}
+function form_send(data){
+	$('.preloader').addClass('hidden');
+	$('form').css( 'height', $('form').innerHeight() );
+	$('form').html('');
+	$('.thx').removeClass('hidden');
+}
