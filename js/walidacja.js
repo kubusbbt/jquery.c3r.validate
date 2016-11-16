@@ -24,6 +24,9 @@
 
 $(document).ready(function(){
 
+	test = true;
+	sendMode = 'ajax'; // ajax | post | normal
+
 	function parentElement( element ){
 		var level = $(element).parent();
 		return level;
@@ -173,9 +176,6 @@ $(document).ready(function(){
 	$('form').submit(function(){
 		output = true;
 		
-		test = true;
-		sendMode = 'normal'; // ajax | post | normal
-
 		$('input[type=text].required').each(function(){
 			if( testInputText(this) == false ){
 				output = false;
@@ -214,26 +214,20 @@ $(document).ready(function(){
 		if(test==true){console.log('output = '+output);}
 
 		if( output == true ){
+
+			// jeżeli mode jest ustawione na ajax
 			if( sendMode == 'ajax' ){
-				$.ajax({
-					url: 'ajax.php',
-					type: 'POST',
-					data: $(this).serialize(),
-
-					success: function(data){
-					  $('#ajax').html(data);
-					}
-				});
-
+				ajax(this);
 				return false;
 			}
+
+			// jeżeli mode jest ustawione na post
 			if( sendMode == 'post' ){
-				$.post("ajax.php", myVars, function(data) {                   
-					console.log(data);
-				}, 'json');
-
+				post(this);
 				return false;
 			}
+
+			// jeżeli mode jest ustawione na normal
 			if( sendMode == 'normal' ){
 				return output;
 			}
@@ -245,11 +239,31 @@ $(document).ready(function(){
 
 }); //end document ready
 
+function ajax(form){
+	$.ajax({
+		url: 'ajax.php',
+		type: 'POST',
+		data: $(form).serialize(),
+
+		success: function(data){
+		  $('#ajax').html(data);
+		}
+	});
+}
+
+function post(form){
+	$.post("ajax.php", myVars, function(data) {                   
+		console.log(data);
+	}, 'json');
+}
+
+
 function preloader(){
 	$('.preloader').removeClass('hidden');
 	$('form').css('opacity', '0.1');
 	$('form').css('pointer-events', 'none');
 }
+
 function form_send(data){
 	$('.preloader').addClass('hidden');
 	$('form').css( 'height', $('form').innerHeight() );
