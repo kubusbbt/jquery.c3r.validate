@@ -24,8 +24,10 @@
 
 $(document).ready(function(){
 
+	/************** SETTINGS **************/
 	test = true;
 	sendMode = 'ajax'; // ajax | post | normal
+	live_validation_event = 'keyup blur change';
 
 	function parentElement( element ){
 		var level = $(element).parent();
@@ -35,6 +37,8 @@ $(document).ready(function(){
 		var level = $(element).parent().parent();
 		return level;
 	}
+	/************ END SETTINGS ************/
+
 
 	function testInputText(element) {
 		if( $(element).data('type') == 'pesel' ){
@@ -150,7 +154,7 @@ $(document).ready(function(){
 	});
 
 	//live walidation
-	$(document).on('keyup blur change', 'input.required, textarea.required, select.required', function(event){
+	$(document).on(live_validation_event, 'input.required, textarea.required, select.required', function(event){
 		if( $(this).attr('type') == 'text' ){
 			testInputText(this);
 		}
@@ -238,6 +242,7 @@ $(document).ready(function(){
 	}); // end $('form').submit(function(){
 
 }); //end document ready
+
 
 function ajax(form){
 	$.ajax({
