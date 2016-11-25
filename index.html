@@ -23,13 +23,17 @@
     textarea{
         width: 100%;
     }
+    .col50{
+        width: 50%;
+        float: left;
+    }
 </style>
 
 
-
+<div class="col50">
 
 <form id="Formularz" name="Formularz" method="POST" action="skrypt_przetwarzajacy.php">
-
+    <h2>id="Formularz"</h2>
 
 	<div class="input-group">
     	<label for="Mail">Cokolwiek</label><br>
@@ -77,6 +81,69 @@
     <input type="submit" value="Send" />
     
 </form>
+
+</div>
+
+
+<div class="col50">
+
+<form id="Formularz2" name="Formularz" method="POST" action="skrypt_przetwarzajacy.php">
+    <h2>id="Formularz2"</h2>
+
+    <div class="input-group">
+        <label for="Mail">Cokolwiek</label><br>
+        <input type="text" required name="Cokolwiek"><br><br>
+    </div>
+    
+    <div class="input-group">
+        <label for="Imie">Liczby</label><br>
+        <input type="text" required name="Liczby" data-pattern="^[0-9]+$"><br><br>
+    </div>
+    
+    <div class="input-group">
+        <label for="Mail">E-mail</label><br>
+        <input type="text" required name="E-mail" data-pattern="^[0-9a-zA-Z_.-]+@[0-9a-zA-Z.-]+\.[a-zA-Z]{2,3}$"><br><br>
+    </div>
+    
+    <div class="input-group">
+        <label for="Mail">Telefon</label><br>
+        <input type="text" required name="Telefon" maxlength="13" data-pattern="^[0-9]{9,13}$"><br><br>
+    </div>
+
+    <div class="input-group">
+        <label for="">Wybierz coś</label><br>
+        <select name="" id="" required>
+            <option value="">Wybierz</option>
+            <option value="1">opcja 1</option>
+            <option value="2">opcja 2</option>
+            <option value="3">opcja 3</option>
+        </select>
+        <br><br>
+    </div>
+
+    <div class="input-group">
+        <label for="Mail">Textarea</label><br>
+        <textarea name="textarea" required id="" cols="30" rows="10"></textarea>
+        <br><br>
+    </div>
+
+    <div class="input-group">
+        <input type="checkbox" required name="checkbox">
+    </div>
+
+    <br><br>
+
+    <input type="submit" value="Send" />
+    
+</form>
+
+</div>
+
+
+
+
+
+
 
 <div id="ajax"></div>
 

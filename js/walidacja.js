@@ -24,21 +24,66 @@
 
 $(document).ready(function(){
 
-	/************** SETTINGS **************/
-	test = true;
-	sendMode = 'ajax'; // ajax | post | normal
+
+	test = true; // jeśli true to konsola zwraca elementy invalid
+	//sendMode = 'ajax'; // ajax | post | normal
 	live_validation_event = 'keyup blur change';
 
+
+	// id formularza
+	walidacja('#Formularz', 'ajax');
+	walidacja('#Formularz2', 'normal');
+
+
+}); //end document ready
+
+
+function ajax(form){
+	$.ajax({
+		url: 'ajax.php',
+		type: 'POST',
+		data: $(form).serialize(),
+
+		success: function(data){
+		  $('#ajax').html(data);
+		}
+	});
+}
+
+function post(form){
+	$.post("ajax.php", myVars, function(data) {                   
+		console.log(data);
+	}, 'json');
+}
+
+function preloader(){
+	$('.preloader').removeClass('hidden');
+	$('form').css('opacity', '0.1');
+	$('form').css('pointer-events', 'none');
+}
+
+function form_send(data){
+	$('.preloader').addClass('hidden');
+	$('form').css( 'height', $('form').innerHeight() );
+	$('form').html('');
+	$('.thx').removeClass('hidden');
+}
+
+
+
+
+function walidacja(formId, sendMode){
+	
+	//element na który ma zostać dodana klasa invalid/valid
 	function parentElement( element ){
 		var level = $(element).parent();
 		return level;
 	}
+	//element na który ma zostać dodana klasa invalid/valid
 	function parentElementCheckbox( element ){
 		var level = $(element).parent().parent();
 		return level;
 	}
-	/************ END SETTINGS ************/
-
 
 	function testInputText(element) {
 		if( $(element).data('type') == 'pesel' ){
@@ -146,7 +191,9 @@ $(document).ready(function(){
 	}
 
 	//remove attr required
-	$('input, textarea, select').each(function(){
+	var elements = formId+' input, '+formId+' textarea, '+formId+' select';
+
+	$(elements).each(function(){
 		if( $(this).attr('required') ){
 			$(this).removeAttr('required');
 			$(this).addClass('required');
@@ -154,7 +201,9 @@ $(document).ready(function(){
 	});
 
 	//live walidation
-	$(document).on(live_validation_event, 'input.required, textarea.required, select.required', function(event){
+	var elementValidation = formId+' input.required, '+formId+' textarea.required, '+formId+' select.required';
+	
+	$(document).on(live_validation_event, elementValidation, function(event){
 		if( $(this).attr('type') == 'text' ){
 			testInputText(this);
 		}
@@ -177,38 +226,38 @@ $(document).ready(function(){
 	});
 
 	//walidation on form send
-	$('form').submit(function(){
+	$(formId).submit(function(){
 		output = true;
 		
-		$('input[type=text].required').each(function(){
+		$(formId+' input[type=text].required').each(function(){
 			if( testInputText(this) == false ){
 				output = false;
 				if(test==true){console.log(this);}
 			}
 		});
 
-		$('input[type=email].required').each(function(){
+		$(formId+' input[type=email].required').each(function(){
 			if( testInputEmail(this) == false ){
 				output = false;
 				if(test==true){console.log(this);}
 			}
 		});
 
-		$('input[type=checkbox].required').each(function(){
+		$(formId+' input[type=checkbox].required').each(function(){
 			if( testInputCheckbox(this) == false ){
 				output = false;
 				if(test==true){console.log(this);}
 			}
 		});
 
-		$('select.required').each(function(){
+		$(formId+' select.required').each(function(){
 			if( testInputSelect(this) == false ){
 				output = false;
 				if(test==true){console.log(this);}
 			}
 		});
 
-		$('textarea.required').each(function(){
+		$(formId+' textarea.required').each(function(){
 			if( testTextarea(this) == false ){
 				output = false;
 				if(test==true){console.log(this);}
@@ -241,37 +290,4 @@ $(document).ready(function(){
 
 	}); // end $('form').submit(function(){
 
-}); //end document ready
-
-
-function ajax(form){
-	$.ajax({
-		url: 'ajax.php',
-		type: 'POST',
-		data: $(form).serialize(),
-
-		success: function(data){
-		  $('#ajax').html(data);
-		}
-	});
-}
-
-function post(form){
-	$.post("ajax.php", myVars, function(data) {                   
-		console.log(data);
-	}, 'json');
-}
-
-
-function preloader(){
-	$('.preloader').removeClass('hidden');
-	$('form').css('opacity', '0.1');
-	$('form').css('pointer-events', 'none');
-}
-
-function form_send(data){
-	$('.preloader').addClass('hidden');
-	$('form').css( 'height', $('form').innerHeight() );
-	$('form').html('');
-	$('.thx').removeClass('hidden');
-}
+} // end walidacja function
