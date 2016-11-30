@@ -31,8 +31,7 @@ $(document).ready(function(){
 
 
 	// id formularza
-	walidacja('#Formularz', 'ajax');
-	walidacja('#Formularz2', 'normal');
+	walidacja('form', 'normal');
 
 
 }); //end document ready
