@@ -281,6 +281,12 @@ function walidacja(formId, sendMode){
 
 			// jeżeli mode jest ustawione na normal
 			if( sendMode == 'normal' ){
+			
+				/* Blokowanie kulkukrotnego przesłania formularza*/
+				$(this).submit(function() {
+					return false;
+				});
+				
 				return output;
 			}
 		}else{
