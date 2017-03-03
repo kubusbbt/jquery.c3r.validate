@@ -35,7 +35,8 @@ $(document).ready(function(){
 
 	// id formularza
 	walidacja('form', 'normal');
-
+	
+	//checkAllCheckbox('.check-all', '.check-all-checkbox');
 
 }); //end document ready
 
@@ -72,6 +73,16 @@ function form_send(data){
 }
 
 
+//funkcja pomocnicza - zaznaczanie kilku checkboxów kliknięciem w jeden
+function checkAllCheckbox(masterCheckbox, secondCheckbox) {
+	$(masterCheckbox).click(function(){
+		if( $(this).is(':checked') ){
+			$(secondCheckbox).prop("checked", true);
+		}else{
+			$(secondCheckbox).prop("checked", false);
+		}
+	})
+}
 
 
 function walidacja(formId, sendMode){
