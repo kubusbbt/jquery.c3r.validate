@@ -19,6 +19,9 @@
 
 	kod pocztowy
 	data-pattern="^[0-9]{2}-[0-9]{3}$"
+	
+	2 identyczne pola testDouble
+	przykład użyty jest w funkcji sendmode normal
 ****************************************************/
 
 
@@ -188,6 +191,21 @@ function walidacja(formId, sendMode){
 
 		return output;
 	}
+	
+	function testDouble(element1, element2) {
+		var input1 = $(element1).val();
+		var input2 = $(element2).val();
+
+		if( input1 == input2 ){
+			parentElement(element1).addClass('valid').removeClass('invalid');
+			parentElement(element2).addClass('valid').removeClass('invalid');
+			return true;
+		}else{
+			parentElement(element1).removeClass('valid').addClass('invalid');
+			parentElement(element2).removeClass('valid').addClass('invalid');
+			return false;
+		}
+	}
 
 	//remove attr required
 	var elements = formId+' input, '+formId+' textarea, '+formId+' select';
@@ -281,6 +299,10 @@ function walidacja(formId, sendMode){
 
 			// jeżeli mode jest ustawione na normal
 			if( sendMode == 'normal' ){
+			
+				//if( !testDouble('input[name=email]', 'input[name=email2]') ){
+				//	output = false;
+				//}
 			
 				/* Blokowanie kulkukrotnego przesłania formularza*/
 				$(this).submit(function() {
