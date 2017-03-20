@@ -157,6 +157,19 @@ function walidacja(formId, sendMode){
 		    return false;		
 		}
 	}
+	
+	function testInputRadio(element){
+		var input = $(element).attr('name');
+		var checked = $('input[name='+input+']').is(':checked');
+
+		if( checked == true ){
+			parentElementCheckbox(element).addClass('valid').removeClass('invalid');
+			return true;
+		}else{
+			parentElementCheckbox(element).removeClass('valid').addClass('invalid');
+			return false;	
+		}
+	}
 
 	function testInputSelect(element){
 		if( $(element).val() != '' ){
@@ -243,6 +256,10 @@ function walidacja(formId, sendMode){
 		if( $(this).attr('type') == 'checkbox' ){
 			testInputCheckbox(this);
 		}
+		
+		if( $(this).attr('type') == 'radio' ){
+			testInputRadio(this);
+		}
 
 		if( $(this).is('select') ){
 			testInputSelect(this);
@@ -273,6 +290,13 @@ function walidacja(formId, sendMode){
 
 		$(formId+' input[type=checkbox].required').each(function(){
 			if( testInputCheckbox(this) == false ){
+				output = false;
+				if(test==true){console.log(this);}
+			}
+		});
+		
+		$(formId+' input[type=radio].required').each(function(){
+			if( testInputRadio(this) == false ){
 				output = false;
 				if(test==true){console.log(this);}
 			}
