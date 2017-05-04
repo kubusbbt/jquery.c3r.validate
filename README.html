@@ -1,0 +1,145 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="walidacja-js">Walidacja JS</h1>
+<h3 id="wywo-anie-funkcji">Wywołanie funkcji</h3>
+<p>Przekazane musi zostać ID formularza</p>
+<pre><code class="lang-javascript">$(&#39;#form&#39;).validate();
+</code></pre>
+<h5 id="przyk-ad-wykorzystania-z-ajax">Przykład wykorzystania z ajax</h5>
+<pre><code class="lang-javascript">$(&#39;#form&#39;).validate({
+
+    &#39;blockSend&#39;: true
+
+}).on(&#39;valid&#39;, function(){
+
+    $.ajax({
+        url: &#39;ajax.php&#39;,
+        type: &#39;POST&#39;,
+        data: $(this).serialize(),
+
+        success: function(data){
+            $(&#39;#ajax&#39;).html(data);
+        }
+    });
+
+});
+</code></pre>
+<hr>
+<h3 id="ustawienia">Ustawienia</h3>
+<p>Dodatkowe ustawienia przekazywane są jako parametr funcji</p>
+<pre><code class="lang-javascript">$(&#39;#form&#39;).validate({
+
+    &#39;blockSend&#39;: false,
+    &#39;invalidClass&#39;: &#39;invalid&#39;
+
+});
+</code></pre>
+<p><strong>blockSend</strong><br>Blokowanie przesłania formularza i przejścia do adresu wskazanego w action</p>
+<blockquote>
+<p>default: false<br>blockSend: true/false</p>
+</blockquote>
+<p>--</p>
+<p><strong>invalidClass</strong><br>Klasa jaką ma otrzymać niepopranie zwalidowany element</p>
+<blockquote>
+<p>default: &#39;invalid&#39;<br>invalidClass: string</p>
+</blockquote>
+<p>--</p>
+<p><strong>validClass</strong><br>Klasa jaką ma otrzymać poprawnie zwalidowany element</p>
+<blockquote>
+<p>default: &#39;valid&#39;<br>validClass: string</p>
+</blockquote>
+<p>--</p>
+<p><strong>liveValidation</strong><br>Walidacja w czasie rzeczywistym</p>
+<blockquote>
+<p>default: true<br>liveValidation: true/false</p>
+</blockquote>
+<p>--</p>
+<p><strong>parentLevel</strong><br>Poziom rodzica elementu który otrzyma klasę invalidClass/validClass</p>
+<blockquote>
+<p>default: 1<br>parentLevel: intiger</p>
+</blockquote>
+<p>--</p>
+<p><strong>parentLevelCheckbox</strong><br>Poziom rodzica elementu checkbox który otrzyma klasę invalidClass/validClass</p>
+<blockquote>
+<p>default: 1<br>parentLevelCheckbox: intiger</p>
+</blockquote>
+<p>--</p>
+<p><strong>test</strong><br>Tryb testowy, zwraca w konsoli status walidacji oraz elementy niepoprawnie zwalidowane</p>
+<blockquote>
+<p>default: false<br>test: true/false</p>
+</blockquote>
+<hr>
+<h3 id="funkcje-callback">Funkcje Callback</h3>
+<p>Triggery przypisane do zdarzeń</p>
+<p><strong>send</strong><br>Odpalany przy przesłaniu formularza bez względu na poprawność walidacji</p>
+<pre><code class="lang-javascript">$(&#39;#form&#39;).validate().on(&#39;send&#39;, function(e, a, b){
+    // e - event
+    // a - output( status walidacji )
+    // b - tablica błędnych elementów
+});
+</code></pre>
+<p>--</p>
+<p><strong>valid</strong><br>Odpalany przy poprawnym zwalidowaniu formularza</p>
+<pre><code class="lang-javascript">$(&#39;#form&#39;).validate().on(&#39;valid&#39;, function(){
+    // twój kod
+});
+</code></pre>
+<p>--</p>
+<p><strong>invalid</strong>
+Odpalany przy niepoprawnym zwalidowaniu formularza</p>
+<pre><code class="lang-javascript">$(&#39;#form&#39;).validate().on(&#39;invalid&#39;, function(e, a){
+    // e - event
+    // a - tablica błędnych elementów
+});
+</code></pre>
+<hr>
+<h3 id="parametry-walidacji">Parametry walidacji</h3>
+<p>Paterny do zastosowania dla konkretnych pól formularza  </p>
+<p><strong>Imię</strong>  </p>
+<pre><code class="lang-html">&lt;input required type=&quot;text&quot; name=&quot;name&quot; data-pattern=&quot;^[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ -]{3,}$&quot;&gt;
+</code></pre>
+<p>--</p>
+<p><strong>Email</strong>  </p>
+<pre><code class="lang-html">&lt;input required type=&quot;email&quot; name=&quot;email&quot;&gt;
+</code></pre>
+<p>--</p>
+<p><strong>Telefon</strong>  </p>
+<pre><code class="lang-html">&lt;input required type=&quot;text&quot; name=&quot;phone&quot; data-pattern=&quot;^[0-9+ ]{9,13}$&quot; maxlength=&quot;13&quot;&gt;
+</code></pre>
+<p>--</p>
+<p><strong>Data urodzenia</strong>  </p>
+<pre><code class="lang-html">&lt;input required type=&quot;text&quot; name=&quot;birth&quot; data-pattern=&quot;^[0-9]{1,2}[-/.][0-9]{1,2}[-/.][0-9]{4}$&quot;&gt;
+</code></pre>
+<p>--</p>
+<p><strong>Pesel</strong>  </p>
+<pre><code class="lang-html">&lt;input required type=&quot;text&quot; name=&quot;pesel&quot; data-type=&quot;pesel&quot; data-pattern=&quot;^[0-9]{11}$&quot; maxlength=&quot;11&quot;&gt;
+</code></pre>
+<p>--</p>
+<p><strong>Numer dowodu osobistego</strong></p>
+<pre><code class="lang-html">data-pattern=&quot;^[A-Z]{3}[0-9]{6}$&quot; maxlength=&quot;9&quot;
+</code></pre>
+<p>--</p>
+<p><strong>Kod pocztowy</strong>  </p>
+<pre><code class="lang-html">&lt;input required type=&quot;text&quot; name=&quot;post&quot; data-pattern=&quot;^[0-9]{2}-[0-9]{3}$&quot;&gt;
+</code></pre>
+<hr>
+<h3 id="funkcje-pomocnicze">Funkcje pomocnicze</h3>
+<p><strong>checkAllCheckbox()</strong>  </p>
+<p>Zaznaczanie kilku checkboxów - parametr pierwszy to klikany checkbox, drugi parametr to checkboxy do zaznaczenia</p>
+<pre><code class="lang-javascript">checkAllCheckbox(&#39;.klikniety-checkbox&#39;, &#39;.checkbox1, .checkbox2&#39;);
+</code></pre>
+<p>--</p>
+<p><strong>preloader( visible, bg, opacity )</strong>  </p>
+<p>Wyświetla preloader</p>
+<p><strong>visible</strong> - <em>true/false</em>: wyświetla/usuwa preloader<br><strong>bg</strong> - <em>default: #fff</em>: parametr opcjonalny - kolor tła pod preloader w formacie hex<br><strong>opacity</strong> - <em>default: 0.9</em>: parametr opcjonalny - poziom krycia tła pod preloaderem  </p>
+<pre><code class="lang-javascript">preloader( true );
+preloader( false );
+preloader( true, &#39;red&#39;, &#39;.5&#39;);
+</code></pre>
+
+      </body>
+    </html>
