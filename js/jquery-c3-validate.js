@@ -1,7 +1,5 @@
 /*
- * jQuery c3 validate Plugin
- * cod3r.pl
- *
+ * jQuery c3r validate Plugin
  * Copyright 2017, cod3r.pl
  */
 
