@@ -1,4 +1,4 @@
-/*!
+/*
  * jQuery c3 validate Plugin
  * cod3r.pl
  *
