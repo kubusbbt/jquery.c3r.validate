@@ -216,16 +216,17 @@ checkAllCheckbox('.klikniety-checkbox', '.checkbox1, .checkbox2');
 
 --
 
-**preloader( visible, bg, opacity )**  
+**preloader( visible, color, bg, opacity )**  
 
 Wyświetla preloader
 
 **visible** - *true/false*: wyświetla/usuwa preloader  
+**color** - *HEX*: parametr opcjonalny - kolor preloadera
 **bg** - *default: #fff*: parametr opcjonalny - kolor tła pod preloader w formacie hex  
 **opacity** - *default: 0.9*: parametr opcjonalny - poziom krycia tła pod preloaderem  
 
 ```javascript
 preloader( true );
 preloader( false );
-preloader( true, 'red', '.5');
+preloader( true, 'green','red', '.5');
 ```
