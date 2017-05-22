@@ -26,7 +26,21 @@
 		// console.log( settings );
 
 
+		// przeładowanie przygotowania formularza
+		if( options == 'prepare' ){
+			requiredRemove(form);
+			return;
+		}
+
 		requiredRemove(form);
+		
+
+		// sprawdzenie poprawności danych
+		if( options == 'test' ){
+			validTest(formId, invalidElements);
+			return;
+		}
+
 
 		if( settings['liveValidation'] == true ){
 			liveValidation(formId);
@@ -119,64 +133,10 @@
 
 		//walidation on form send
 		$(formId).submit(function(){
-			output = true;
-			
-			$(formId+' input[type=text].required').each(function(){
-				if( testInputText(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
-			
-			$(formId+' input[type=password].required').each(function(){
-				if( testInputText(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
 
-			$(formId+' input[type=email].required').each(function(){
-				if( testInputEmail(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
-
-			$(formId+' input[type=checkbox].required').each(function(){
-				if( testInputCheckbox(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
-
-			$(formId+' input[type=radio].required').each(function(){
-				if( testInputRadio(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
-
-			$(formId+' select.required').each(function(){
-				if( testInputSelect(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
-
-			$(formId+' textarea.required').each(function(){
-				if( testTextarea(this) == false ){
-					invalidElements.push(this);
-					output = false;
-				}
-			});
-
-			if( settings['test']==true ){
-				console.log('output = '+output);
-				console.log( invalidElements );
-			}
+			validTest(formId, invalidElements);
 
 			$(this).trigger( 'send', [output, invalidElements] );
-
 
 			if( output == true )
 			{
@@ -203,6 +163,67 @@
 		});
 
 	} // end function sendValidation()
+
+
+	function validTest(formId, invalidElements){
+		output = true;
+		
+		$(formId+' input[type=text].required').each(function(){
+			if( testInputText(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+		
+		$(formId+' input[type=password].required').each(function(){
+			if( testInputText(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+
+		$(formId+' input[type=email].required').each(function(){
+			if( testInputEmail(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+
+		$(formId+' input[type=checkbox].required').each(function(){
+			if( testInputCheckbox(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+
+		$(formId+' input[type=radio].required').each(function(){
+			if( testInputRadio(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+
+		$(formId+' select.required').each(function(){
+			if( testInputSelect(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+
+		$(formId+' textarea.required').each(function(){
+			if( testTextarea(this) == false ){
+				invalidElements.push(this);
+				output = false;
+			}
+		});
+
+		if( settings['test']==true ){
+			console.log('output = '+output);
+			console.log( invalidElements );
+		}
+
+		return output;
+	}
 
 
 	/****************************/

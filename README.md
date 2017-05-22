@@ -32,6 +32,27 @@ $('#form').validate({
 });
 ```
 
+### Funkcja prepare
+
+Funkcja pozwala przygotować formularz do walidacji po modyfikacjach  
+
+```javascript
+$('#prepare').on('click', function(){
+	$('#form').validate('prepare');
+})
+```
+
+### Funkcja test
+
+Funkcja pozwala sprawdzić poprawność formularza bez jego wysyłki  
+
+```javascript
+$('#test').on('click', function(){
+	$('#form').validate('test');
+})
+```
+
+
 ---
 
 ### Ustawienia
