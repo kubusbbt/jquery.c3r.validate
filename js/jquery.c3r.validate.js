@@ -37,8 +37,7 @@
 
 		// sprawdzenie poprawności danych
 		if( options == 'test' ){
-			validTest(formId, invalidElements);
-			return;
+			return validTest(formId, invalidElements);
 		}
 
 
