@@ -5,13 +5,16 @@
 
 import $ from 'jquery'
 
+var settings;
+var output;
+
 $.fn.validate = function(options){
 	
 	var form = this,
 		formId = '#'+form.attr('id'),
 		invalidElements = [];
 
-	var settings = {
+	settings = {
 		'blockSend': false,
 		'invalidClass': 'invalid',
 		'validClass': 'valid',
@@ -335,7 +338,7 @@ function testTextarea(element){
 function testPesel(element) {
 
 	var pesel = $(element).val();
-	var output = false;
+	output = false;
 	
 	var reg = /^[0-9]{11}$/;
 	if(reg.test(pesel) == false) {
@@ -361,7 +364,7 @@ function testPesel(element) {
 
 function testDouble(formID) {
 	
-	var output = false;
+	output = false;
 
 	var inputs = $(formID + ' input[data-equal]');
 	var inputsArray = [];
