@@ -1,0 +1,19 @@
+{
+  "name": "jquery.c3r.validate",
+  "version": "1.0.0",
+  "description": "jQuery form validate",
+  "main": "dist/jquery.c3r.validate.es6.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kubusbbt/jquery.c3r.validate.git"
+  },
+  "author": "cod3r.pl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kubusbbt/jquery.c3r.validate/issues"
+  },
+  "homepage": "https://github.com/kubusbbt/jquery.c3r.validate#readme"
+}
