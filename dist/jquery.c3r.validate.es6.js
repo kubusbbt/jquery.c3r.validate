@@ -451,3 +451,5 @@ function preloader(param, color, bg, opacity){
 		$('.preloader-container').remove();
 	}
 }
+
+export default preloader();
