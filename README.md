@@ -1,5 +1,11 @@
 # Walidacja JS
 
+### Instalacja poprzez NPM
+
+```zsh
+npm install jquery.c3r.validate
+```
+
 
 ### Wywołanie funkcji
 
