@@ -1,6 +1,6 @@
 {
   "name": "jquery.c3r.validate",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "jQuery form validate",
   "main": "dist/jquery.c3r.validate.es6.min.js",
   "scripts": {
