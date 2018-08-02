@@ -3,6 +3,8 @@
 * Copyright 2017-2018, cod3r.pl
 */
 
+var settings;
+
 
 $.fn.validate = function(options){
 	
@@ -10,7 +12,7 @@ $.fn.validate = function(options){
 		formId = '#'+form.attr('id'),
 		invalidElements = [];
 
-	var settings = {
+	settings = {
 		'blockSend': false,
 		'invalidClass': 'invalid',
 		'validClass': 'valid',
