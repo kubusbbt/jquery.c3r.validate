@@ -4,7 +4,7 @@
 */
 
 var settings;
-
+var output;
 
 $.fn.validate = function(options){
 	
